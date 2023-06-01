@@ -1,5 +1,3 @@
-// ignore_for_file: file_names
-
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/login_page.dart';
 
@@ -22,20 +20,36 @@ class _MainPageState extends State<MainPage> {
             children: [
               Container(
                 width: 500,
-                padding: const EdgeInsets.symmetric(vertical: 200.0),
+                padding: const EdgeInsets.symmetric(vertical: 50.0),
                 alignment: Alignment.center,
                 child: Image.asset('assets/Logo.png'),
               ),
               TextButton(
+                style: TextButton.styleFrom(
+                  backgroundColor: Colors.blue,
+                  primary: Colors.white,
+                  padding: const EdgeInsets.symmetric(horizontal: 50.0),
+                  textStyle: const TextStyle(fontSize: 20),
+                ),
                 onPressed: () {
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
                     return const LoginPage();
                   }));
                 },
-                child: const Text('Entrar'),
+                child: const Text(
+                  'Entrar',
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
               ),
-              Image.asset('assets/from.png'),
+              Container(
+                width: 100,
+                padding: const EdgeInsets.symmetric(vertical: 50.0),
+                alignment: Alignment.center,
+                child: Image.asset('assets/from.png'),
+              ),
             ],
           ),
         ),
