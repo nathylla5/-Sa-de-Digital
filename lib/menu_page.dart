@@ -80,12 +80,10 @@ class _MenuViewState extends State<MenuView> {
               SizedBox(width: 50)
             ],
           ),
-          Container(
-            child: Image.asset(
-              'assets/Logo.png',
-              width: 150,
-              height: 150,
-            ),
+          Image.asset(
+            'assets/Logo.png',
+            width: 150,
+            height: 150,
           )
         ],
       ),
