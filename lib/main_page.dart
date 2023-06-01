@@ -1,7 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/loginPage.dart';
+import 'package:flutter_application_2/login_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -28,14 +28,14 @@ class _MainPageState extends State<MainPage> {
               ),
               TextButton(
                 onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) {
                     return const LoginPage();
                   }));
                 },
                 child: const Text('Entrar'),
-                ),
+              ),
               Image.asset('assets/from.png'),
-              
             ],
           ),
         ),
