@@ -16,7 +16,7 @@ class _MenuViewState extends State<MenuView> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 100,
-        backgroundColor: Colors.cyan[600],
+        backgroundColor: Colors.cyan[400],
         elevation: 10,
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(bottom: Radius.circular(20))),
