@@ -30,56 +30,21 @@ class _MenuViewState extends State<MenuView> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          SizedBox(
-            height: heightSizedBox,
-          ),
-          Row(
-            children: [
-              SizedBox(width: 50),
-              Expanded(
-                  child: buildButton(
-                      backgroundColor: backgroundColor,
-                      urlImage: 'assets/alarme.png')),
-              SizedBox(width: 60),
-              Expanded(
-                  child: buildButton(
-                      backgroundColor: backgroundColor,
-                      urlImage: 'assets/remedio.png')),
-              SizedBox(width: 50)
-            ],
-          ),
           SizedBox(height: heightSizedBox),
-          Row(
-            children: [
-              SizedBox(width: 50),
-              Expanded(
-                  child: buildButton(
-                      backgroundColor: backgroundColor,
-                      urlImage: 'assets/tabela_lista.png')),
-              SizedBox(width: 60),
-              Expanded(
-                  child: buildButton(
-                      backgroundColor: backgroundColor,
-                      urlImage: 'assets/caixa_doacao.png')),
-              SizedBox(width: 50)
-            ],
-          ),
+          buildRowWithButtons(
+              backgroundColor: backgroundColor,
+              urlLeftImage: 'assets/alarme.png',
+              urlRightImage: 'assets/remedio.png'),
           SizedBox(height: heightSizedBox),
-          Row(
-            children: [
-              SizedBox(width: 50),
-              Expanded(
-                  child: buildButton(
-                      backgroundColor: backgroundColor,
-                      urlImage: 'assets/unidade_saude.png')),
-              SizedBox(width: 60),
-              Expanded(
-                  child: buildButton(
-                      backgroundColor: backgroundColor,
-                      urlImage: 'assets/ambulancia.png')),
-              SizedBox(width: 50)
-            ],
-          ),
+          buildRowWithButtons(
+              backgroundColor: backgroundColor,
+              urlLeftImage: 'assets/tabela_lista.png',
+              urlRightImage: 'assets/caixa_doacao.png'),
+          SizedBox(height: heightSizedBox),
+          buildRowWithButtons(
+              backgroundColor: backgroundColor,
+              urlLeftImage: 'assets/unidade_saude.png',
+              urlRightImage: 'assets/ambulancia.png'),
           Image.asset(
             'assets/Logo.png',
             width: 150,
@@ -90,7 +55,7 @@ class _MenuViewState extends State<MenuView> {
     );
   }
 
-  buildButton({dynamic backgroundColor, required String urlImage}) {
+  buildButton({required dynamic backgroundColor, required String urlImage}) {
     return Card(
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -114,6 +79,31 @@ class _MenuViewState extends State<MenuView> {
               height: double.infinity,
             ),
           )),
+    );
+  }
+
+  buildRowWithButtons(
+      {required dynamic backgroundColor,
+      required String urlLeftImage,
+      required String urlRightImage}) {
+    return Row(
+      children: [
+        SizedBox(width: 50),
+        Expanded(
+          child: buildButton(
+            backgroundColor: backgroundColor,
+            urlImage: urlLeftImage,
+          ),
+        ),
+        SizedBox(width: 60),
+        Expanded(
+          child: buildButton(
+            backgroundColor: backgroundColor,
+            urlImage: urlRightImage,
+          ),
+        ),
+        SizedBox(width: 50),
+      ],
     );
   }
 }
