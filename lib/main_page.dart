@@ -20,17 +20,11 @@ class _MainPageState extends State<MainPage> {
             children: [
               Container(
                 width: 500,
-                padding: const EdgeInsets.symmetric(vertical: 50.0),
-                alignment: Alignment.center,
+                padding: const EdgeInsets.symmetric(vertical: 100.0),
+                alignment: Alignment.bottomCenter,
                 child: Image.asset('assets/Logo.png'),
               ),
               TextButton(
-                style: TextButton.styleFrom(
-                  backgroundColor: Colors.blue,
-                  primary: Colors.white,
-                  padding: const EdgeInsets.symmetric(horizontal: 50.0),
-                  textStyle: const TextStyle(fontSize: 20),
-                ),
                 onPressed: () {
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {

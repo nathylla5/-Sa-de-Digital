@@ -16,12 +16,15 @@ class _LoginPageState extends State<LoginPage> {
            mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset('assets/Logo.png'),
-            Text('Nome:'),
-            Flexible(child: TextField()),
-            Text('Senha:'),
-            Flexible(child: TextField()),
-
-
+            Flexible(child: TextField(
+              decoration: InputDecoration(
+                hintText: 'Usuário',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(51)
+                ),
+              ),
+            )),
+            
           ],
         ),
       )
