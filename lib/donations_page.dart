@@ -60,7 +60,11 @@ class _DonationsViewState extends State<DonationsView> {
               ))
         ],
       ),
-      body: Column(children: donationTiles),
+      body: ListView(children: [
+        Column(
+          children: donationTiles,
+        )
+      ]),
     );
   }
 }
