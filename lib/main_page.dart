@@ -13,43 +13,41 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: SizedBox(
+        body: Container(
           width: double.maxFinite,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Container(
+              /*Container(
                 width: 500,
-                padding: const EdgeInsets.symmetric(vertical: 50.0),
-                alignment: Alignment.center,
+                padding: const EdgeInsets.symmetric(vertical: 100.0),
+                alignment: Alignment.bottomCenter,
                 child: Image.asset('assets/Logo.png'),
+              ),*/
+              Flexible(
+                child: Container(),
+                flex: 1,
               ),
-              TextButton(
-                style: TextButton.styleFrom(
-                  backgroundColor: Colors.blue,
-                  primary: Colors.white,
-                  padding: const EdgeInsets.symmetric(horizontal: 50.0),
-                  textStyle: const TextStyle(fontSize: 20),
-                ),
-                onPressed: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) {
-                    return const LoginPage();
-                  }));
-                },
-                child: const Text(
-                  'Entrar',
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
+              Flexible(
+                flex: 1,
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (context) {
+                      return const LoginPage();
+                    }));
+                  },
+                  child: Image.asset('assets/Logo.png'),
                 ),
               ),
-              Container(
-                width: 100,
-                padding: const EdgeInsets.symmetric(vertical: 50.0),
-                alignment: Alignment.center,
-                child: Image.asset('assets/from.png'),
-              ),
+              Flexible(
+                flex: 1,
+                child: Container(
+                  width: 100,
+                  alignment: Alignment.bottomCenter,
+                  child: Image.asset('assets/from.png'),
+                ),
+              )
             ],
           ),
         ),
