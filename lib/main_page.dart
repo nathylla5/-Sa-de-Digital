@@ -35,9 +35,11 @@ class _MainPageState extends State<MainPage> {
                     Navigator.of(context)
                         .push(MaterialPageRoute(builder: (context) {
                       return const LoginPage();
+                      
                     }));
                   },
-                  child: Image.asset('assets/Logo.png'),
+                  child: Hero(
+                      tag: 'imageHero', child: Image.asset('assets/Logo.png')),
                 ),
               ),
               Flexible(

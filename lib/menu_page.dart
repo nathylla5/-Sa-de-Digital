@@ -45,10 +45,10 @@ class _MenuViewState extends State<MenuView> {
               backgroundColor: backgroundColor,
               urlLeftImage: 'assets/unidade_saude.png',
               urlRightImage: 'assets/ambulancia.png'),
-          Image.asset(
-            'assets/Logo.png',
-            width: 150,
-            height: 150,
+          Hero(
+              tag: 'imageHero',
+              child: Image.asset('assets/Logo.png', width: 150, height: 150,),
+            
           )
         ],
       ),
