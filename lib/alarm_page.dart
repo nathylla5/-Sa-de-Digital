@@ -8,7 +8,6 @@ class AlarmsView extends StatefulWidget {
 }
 
 class _AlarmsViewState extends State<AlarmsView> {
-  var _value = false;
   List<Widget> alarmsTiles = [];
   List<bool> switchValues = [];
 
