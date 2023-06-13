@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_2/alarm_page.dart';
 import 'package:flutter_application_2/donations_page.dart';
 import 'package:flutter_application_2/login_page.dart';
+import 'package:flutter_application_2/profile_page.dart';
 
 final constNames = [
   'Alarmes',
@@ -34,7 +35,11 @@ class _MenuViewState extends State<MenuView> {
             borderRadius: BorderRadius.vertical(bottom: Radius.circular(20))),
         leading: IconButton(
             iconSize: 60,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => ProfileView()),
+              );
+            },
             icon: const Icon(
               Icons.account_circle,
             )),
@@ -55,7 +60,7 @@ class _MenuViewState extends State<MenuView> {
           buildButton(
               backgroundColor: backgroundColor,
               urlImage: 'assets/remedio.png',
-              nextPage: LoginPage(),
+              nextPage: MenuView(),
               text: 'Remédios',
               page: constNames[1],
               primaryText: constNames[1],
@@ -64,7 +69,7 @@ class _MenuViewState extends State<MenuView> {
           buildButton(
               backgroundColor: backgroundColor,
               urlImage: 'assets/tabela_lista.png',
-              nextPage: LoginPage(),
+              nextPage: MenuView(),
               text: 'Tabela',
               page: constNames[2],
               primaryText: constNames[2],
@@ -82,7 +87,7 @@ class _MenuViewState extends State<MenuView> {
           buildButton(
               backgroundColor: backgroundColor,
               urlImage: 'assets/unidade_saude.png',
-              nextPage: LoginPage(),
+              nextPage: MenuView(),
               text: 'Unidade de Saúde',
               page: constNames[4],
               primaryText: constNames[4],
@@ -91,7 +96,7 @@ class _MenuViewState extends State<MenuView> {
           buildButton(
               backgroundColor: backgroundColor,
               urlImage: 'assets/ambulancia.png',
-              nextPage: LoginPage(),
+              nextPage: MenuView(),
               text: 'Ambulância',
               page: constNames[5],
               primaryText: constNames[5],
@@ -194,13 +199,13 @@ class _MenuViewState extends State<MenuView> {
                 buildCardImage(urlImage: urlImage),
                 const SizedBox(height: 16),
                 Text(primaryText,
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 20)),
                 const SizedBox(height: 16),
                 Text(secondText, style: TextStyle(color: Colors.grey[300])),
-                const SizedBox(height: 16),
+                const SizedBox(height: 26),
                 ButtonTheme(
                   minWidth: 300,
                   height: 150,
@@ -217,11 +222,11 @@ class _MenuViewState extends State<MenuView> {
                         ),
                       ),
                       backgroundColor: MaterialStateProperty.all<Color>(
-                          Color.fromRGBO(0, 131, 143, 1)),
+                          const Color.fromRGBO(0, 131, 143, 1)),
                     ),
                     child: Text(
                       'Ir para tela de ' + page,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                       ),
                     ),
