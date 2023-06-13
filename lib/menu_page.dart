@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/alarm_page.dart';
 import 'package:flutter_application_2/donations_page.dart';
-import 'package:flutter_application_2/login_page.dart';
 import 'package:flutter_application_2/profile_page.dart';
 
 final constNames = [
@@ -141,10 +140,10 @@ class _MenuViewState extends State<MenuView> {
           Expanded(
             child: Text(
               text,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.cyan[700]),
             ),
           ),
         ],
