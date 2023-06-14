@@ -57,9 +57,9 @@ class _AlarmsViewState extends State<AlarmsView> {
           isThreeLine: true,
           dense: true,
           value: switchValues[alarmsTiles.length],
-          onChanged: (bool value) {
+          onChanged: (bool switchValue) {
             setState(() {
-              switchValues[alarmsTiles.length] = value;
+              switchValues[alarmsTiles.length] = switchValue;
             });
           },
         ),
