@@ -190,7 +190,7 @@ class _MenuViewState extends State<MenuView> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
-          content: Container(
+          content: SizedBox(
             height: 300,
             child: Column(
               mainAxisSize: MainAxisSize.min,
