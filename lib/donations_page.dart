@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/menu_page.dart';
 
 class DonationsView extends StatefulWidget {
   const DonationsView({Key? key}) : super(key: key);
@@ -45,7 +46,11 @@ class _DonationsViewState extends State<DonationsView> {
           child: IconButton(
               iconSize: 40,
               color: Colors.cyan,
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => MenuView()),
+                );
+              },
               icon: const Icon(
                 Icons.arrow_back_ios,
               )),
