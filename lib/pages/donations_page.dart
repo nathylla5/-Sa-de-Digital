@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/menu_page.dart';
+import 'package:flutter_application_2/pages/menu_page.dart';
 
 class DonationsView extends StatefulWidget {
   const DonationsView({Key? key}) : super(key: key);

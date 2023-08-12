@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/menu_page.dart';
-import 'package:flutter_application_2/register_page.dart';
+import 'package:flutter_application_2/pages/menu_page.dart';
+import 'package:flutter_application_2/pages/register_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -43,7 +43,7 @@ class _LoginPageState extends State<LoginPage> {
                     borderRadius: BorderRadius.circular(50.0),
                     borderSide: BorderSide.none,
                   ),
-                  prefixIcon: Padding( 
+                  prefixIcon: Padding(
                     child: Icon(Icons.person_2_outlined, color: Colors.white),
                     padding: EdgeInsets.all(5),
                   ),

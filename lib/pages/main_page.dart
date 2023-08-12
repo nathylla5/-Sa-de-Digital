@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/login_page.dart';
+import 'package:flutter_application_2/pages/login_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -35,7 +35,6 @@ class _MainPageState extends State<MainPage> {
                     Navigator.of(context)
                         .push(MaterialPageRoute(builder: (context) {
                       return const LoginPage();
-                      
                     }));
                   },
                   child: Hero(
