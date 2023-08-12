@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/alarm_page.dart';
-import 'package:flutter_application_2/donations_page.dart';
-import 'package:flutter_application_2/profile_page.dart';
+import 'package:flutter_application_2/pages/alarm_page.dart';
+import 'package:flutter_application_2/pages/donations_page.dart';
+import 'package:flutter_application_2/pages/login_page.dart';
 
 final constNames = [
   'Alarmes',
@@ -34,11 +34,7 @@ class _MenuViewState extends State<MenuView> {
             borderRadius: BorderRadius.vertical(bottom: Radius.circular(20))),
         leading: IconButton(
             iconSize: 60,
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => ProfileView()),
-              );
-            },
+            onPressed: () {},
             icon: const Icon(
               Icons.account_circle,
             )),
@@ -59,7 +55,7 @@ class _MenuViewState extends State<MenuView> {
           buildButton(
               backgroundColor: backgroundColor,
               urlImage: 'assets/remedio.png',
-              nextPage: MenuView(),
+              nextPage: LoginPage(),
               text: 'Remédios',
               page: constNames[1],
               primaryText: constNames[1],
@@ -68,7 +64,7 @@ class _MenuViewState extends State<MenuView> {
           buildButton(
               backgroundColor: backgroundColor,
               urlImage: 'assets/tabela_lista.png',
-              nextPage: MenuView(),
+              nextPage: LoginPage(),
               text: 'Tabela',
               page: constNames[2],
               primaryText: constNames[2],
@@ -86,7 +82,7 @@ class _MenuViewState extends State<MenuView> {
           buildButton(
               backgroundColor: backgroundColor,
               urlImage: 'assets/unidade_saude.png',
-              nextPage: MenuView(),
+              nextPage: LoginPage(),
               text: 'Unidade de Saúde',
               page: constNames[4],
               primaryText: constNames[4],
@@ -95,7 +91,7 @@ class _MenuViewState extends State<MenuView> {
           buildButton(
               backgroundColor: backgroundColor,
               urlImage: 'assets/ambulancia.png',
-              nextPage: MenuView(),
+              nextPage: LoginPage(),
               text: 'Ambulância',
               page: constNames[5],
               primaryText: constNames[5],
@@ -140,10 +136,10 @@ class _MenuViewState extends State<MenuView> {
           Expanded(
             child: Text(
               text,
-              style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.cyan[700]),
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ],
@@ -190,7 +186,7 @@ class _MenuViewState extends State<MenuView> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
-          content: SizedBox(
+          content: Container(
             height: 300,
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -198,13 +194,13 @@ class _MenuViewState extends State<MenuView> {
                 buildCardImage(urlImage: urlImage),
                 const SizedBox(height: 16),
                 Text(primaryText,
-                    style: const TextStyle(
+                    style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 20)),
                 const SizedBox(height: 16),
                 Text(secondText, style: TextStyle(color: Colors.grey[300])),
-                const SizedBox(height: 26),
+                const SizedBox(height: 16),
                 ButtonTheme(
                   minWidth: 300,
                   height: 150,
@@ -221,11 +217,11 @@ class _MenuViewState extends State<MenuView> {
                         ),
                       ),
                       backgroundColor: MaterialStateProperty.all<Color>(
-                          const Color.fromRGBO(0, 131, 143, 1)),
+                          Color.fromRGBO(0, 131, 143, 1)),
                     ),
                     child: Text(
                       'Ir para tela de ' + page,
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: Colors.white,
                       ),
                     ),
