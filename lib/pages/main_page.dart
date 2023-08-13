@@ -35,7 +35,6 @@ class _MainPageState extends State<MainPage> {
                     Navigator.of(context)
                         .push(MaterialPageRoute(builder: (context) {
                       return const LoginPage();
-                      
                     }));
                   },
                   child: Hero(

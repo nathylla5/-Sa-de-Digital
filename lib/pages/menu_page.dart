@@ -12,6 +12,7 @@ final constNames = [
   'Ambulância'
 ];
 
+
 class MenuView extends StatefulWidget {
   const MenuView({Key? key}) : super(key: key);
 
@@ -34,7 +35,11 @@ class _MenuViewState extends State<MenuView> {
             borderRadius: BorderRadius.vertical(bottom: Radius.circular(20))),
         leading: IconButton(
             iconSize: 60,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => ProfileView()),
+              );
+            },
             icon: const Icon(
               Icons.account_circle,
             )),
@@ -96,6 +101,7 @@ class _MenuViewState extends State<MenuView> {
               page: constNames[5],
               primaryText: constNames[5],
               secondText: ''),
+
           SizedBox(height: heightSizedBox),
           Hero(
             tag: 'imageHero',
@@ -109,7 +115,6 @@ class _MenuViewState extends State<MenuView> {
       ),
     );
   }
-
   buildButton({
     required dynamic backgroundColor,
     required String urlImage,

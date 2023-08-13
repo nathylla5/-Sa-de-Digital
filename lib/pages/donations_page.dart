@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/pages/menu_page.dart';
+import 'package:flutter_application_2/widgets/create_donation.dart';
 
 class DonationsView extends StatefulWidget {
   const DonationsView({Key? key}) : super(key: key);
@@ -13,21 +14,7 @@ class _DonationsViewState extends State<DonationsView> {
 
   void addDonationTile() {
     setState(() {
-      donationTiles.add(ListTile(
-        leading: const Icon(
-          Icons.health_and_safety_outlined,
-          color: Colors.cyan,
-          size: 30,
-        ),
-        title: const Text('Nome da doação',
-            style: TextStyle(color: Colors.cyan, fontSize: 15)),
-        subtitle: const Text('Local da doação'),
-        isThreeLine: true,
-        onTap: () {},
-        dense: true,
-        trailing: const Text('Quantidade',
-            style: TextStyle(color: Colors.cyan, fontSize: 15)),
-      ));
+      donationTiles.add(CreateDonation(quantity: 2, donationName: '', location: ''));
     });
   }
 
@@ -48,7 +35,7 @@ class _DonationsViewState extends State<DonationsView> {
               color: Colors.cyan,
               onPressed: () {
                 Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => MenuView()),
+                  MaterialPageRoute(builder: (context) => const MenuView()),
                 );
               },
               icon: const Icon(
