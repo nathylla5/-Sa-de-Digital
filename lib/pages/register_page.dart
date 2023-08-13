@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/db/dao/UserDao.dart';
+import 'package:flutter_application_2/domain/user.dart';
+import 'package:uuid/uuid.dart';
 
 import '../widgets/register_text_field.dart';
 
@@ -10,7 +13,6 @@ class RegisterView extends StatefulWidget {
 }
 
 class _RegisterViewState extends State<RegisterView> {
-  DateTime selectedDate = DateTime.now();
   String name = '';
   String password = '';
   String confirmPassword = '';
@@ -56,25 +58,16 @@ class _RegisterViewState extends State<RegisterView> {
                     labelColor: Colors.white,
                   ),
                   const SizedBox(height: 10),
-                  GestureDetector(
-                    onTap: _openDatePicker,
-                    child: AbsorbPointer(
-                      absorbing: true,
-                      child: IgnorePointer(
-                        ignoring: true,
-                        child: RegisterTextField(
-                          onChange: (text) {
-                            birthDate = text;
-                          },
-                          labelText: 'Data de nascimento',
-                          obscureText: false,
-                          labelColor: Colors.white,
-                          fillColor: const Color(0xFFA4D8E5),
-                          iconColor: Colors.white,
-                          icon: Icons.date_range,
-                        ),
-                      ),
-                    ),
+                  RegisterTextField(
+                    onChange: (text) {
+                      birthDate = text;
+                    },
+                    labelText: 'Data de nascimento',
+                    obscureText: false,
+                    labelColor: Colors.white,
+                    fillColor: const Color(0xFFA4D8E5),
+                    iconColor: Colors.white,
+                    icon: Icons.date_range,
                   ),
                   const SizedBox(height: 10),
                   RegisterTextField(
@@ -111,7 +104,7 @@ class _RegisterViewState extends State<RegisterView> {
                         ),
                         padding: const EdgeInsets.symmetric(horizontal: 110.0),
                       ),
-                      onPressed: () {},
+                      onPressed: addUser,
                       child: const Text(
                         'Confirmar',
                         style: TextStyle(
@@ -131,23 +124,16 @@ class _RegisterViewState extends State<RegisterView> {
     );
   }
 
-  void _openDatePicker() async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: selectedDate,
-      firstDate: DateTime(1900),
-      lastDate: DateTime.now(),
+  void addUser() {
+    var uuid = const Uuid();
+    User user = User(
+      id: uuid.v1(),
+      email: email,
+      date: birthDate,
+      password: password,
+      name: name,
     );
-
-    if (picked != null && picked != selectedDate) {
-      setState(() {
-        selectedDate = picked;
-        birthDate = formatDate(picked);
-      });
-    }
-  }
-
-  String formatDate(DateTime date) {
-    return '${date.day}/${date.month}/${date.year}';
+    UserDao().insertUser(user);
+    print('Usuário inserido com sucesso!');
   }
 }
