@@ -68,6 +68,7 @@ class _RegisterViewState extends State<RegisterView> {
                       fillColor: const Color(0xFFA4D8E5),
                       iconColor: Colors.white,
                       labelText: 'Senha',
+                      obscureText: true,
                       labelColor: Colors.white),
                   SizedBox(height: 10),
                   buildTextField(
@@ -116,11 +117,13 @@ class _RegisterViewState extends State<RegisterView> {
       required labelColor,
       required Color fillColor,
       required Color iconColor,
-      required IconData icon}) {
+      required IconData icon,
+      bool obscureText = false}) {
     return Container(
       height: 45,
       padding: EdgeInsets.symmetric(horizontal: 50),
       child: TextField(
+        obscureText: obscureText,
         onChanged: onChanged,
         style: TextStyle(color: Colors.white, fontSize: 15),
         keyboardType: TextInputType.name,
