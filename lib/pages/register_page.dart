@@ -10,11 +10,12 @@ class RegisterView extends StatefulWidget {
 }
 
 class _RegisterViewState extends State<RegisterView> {
+  DateTime selectedDate = DateTime.now();
   String name = '';
   String password = '';
   String confirmPassword = '';
   String email = '';
-  String user = '';
+  String birthDate = '';
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +41,7 @@ class _RegisterViewState extends State<RegisterView> {
                     icon: Icons.perm_identity_sharp,
                     fillColor: const Color(0xFFA4D8E5),
                     iconColor: Colors.white,
-                    labelText: 'Nome',
+                    labelText: 'Nome completo',
                     labelColor: Colors.white,
                   ),
                   const SizedBox(height: 10),
@@ -55,15 +56,25 @@ class _RegisterViewState extends State<RegisterView> {
                     labelColor: Colors.white,
                   ),
                   const SizedBox(height: 10),
-                  RegisterTextField(
-                    onChange: (text) {
-                      user = text;
-                    },
-                    icon: Icons.perm_identity_sharp,
-                    fillColor: const Color(0xFFA4D8E5),
-                    iconColor: Colors.white,
-                    labelText: 'Usuário',
-                    labelColor: Colors.white,
+                  GestureDetector(
+                    onTap: _openDatePicker,
+                    child: AbsorbPointer(
+                      absorbing: true,
+                      child: IgnorePointer(
+                        ignoring: true,
+                        child: RegisterTextField(
+                          onChange: (text) {
+                            birthDate = text;
+                          },
+                          labelText: 'Data de nascimento',
+                          obscureText: false,
+                          labelColor: Colors.white,
+                          fillColor: const Color(0xFFA4D8E5),
+                          iconColor: Colors.white,
+                          icon: Icons.date_range,
+                        ),
+                      ),
+                    ),
                   ),
                   const SizedBox(height: 10),
                   RegisterTextField(
@@ -79,15 +90,16 @@ class _RegisterViewState extends State<RegisterView> {
                   ),
                   const SizedBox(height: 10),
                   RegisterTextField(
-                      onChange: (text) {
-                        confirmPassword = text;
-                      },
-                      icon: Icons.lock_outline,
-                      fillColor: const Color(0xFFA4D8E5),
-                      iconColor: Colors.white,
-                      obscureText: true,
-                      labelText: 'Confirmar senha',
-                      labelColor: Colors.white),
+                    onChange: (text) {
+                      confirmPassword = text;
+                    },
+                    icon: Icons.lock_outline,
+                    fillColor: const Color(0xFFA4D8E5),
+                    iconColor: Colors.white,
+                    obscureText: true,
+                    labelText: 'Confirmar senha',
+                    labelColor: Colors.white,
+                  ),
                   const SizedBox(height: 10),
                   Container(
                     height: 45,
@@ -117,5 +129,25 @@ class _RegisterViewState extends State<RegisterView> {
         ),
       ),
     );
+  }
+
+  void _openDatePicker() async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now(),
+    );
+
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+        birthDate = formatDate(picked);
+      });
+    }
+  }
+
+  String formatDate(DateTime date) {
+    return '${date.day}/${date.month}/${date.year}';
   }
 }

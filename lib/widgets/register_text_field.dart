@@ -9,7 +9,17 @@ class RegisterTextField extends StatefulWidget {
   final IconData icon;
   final bool obscureText;
 
-  const RegisterTextField({Key? key, this.obscureText = false, required this.labelText, required this.labelColor, required this.fillColor, required this.iconColor, required this.icon, required this.onChange}) : super(key: key);
+  const RegisterTextField({
+    Key? key,
+    this.obscureText = false,
+    required this.labelText,
+    required this.labelColor,
+    required this.fillColor,
+    required this.iconColor,
+    required this.icon,
+    required this.onChange,
+  }) : super(key: key);
+
   @override
   State<StatefulWidget> createState() => _RegisterTextFieldState();
 }
@@ -42,5 +52,4 @@ class _RegisterTextFieldState extends State<RegisterTextField> {
       ),
     );
   }
-
 }
