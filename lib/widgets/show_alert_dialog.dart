@@ -21,6 +21,23 @@ class ShowAlertDialog extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() => _ShowAlertDialogState();
+
+  void showAlertDialog(BuildContext context, Widget nextPage, String page,
+      String primaryText, String secondText, String urlImage) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return ShowAlertDialog(
+          context: context,
+          nextPage: nextPage,
+          page: page,
+          primaryText: primaryText,
+          secondText: secondText,
+          urlImage: urlImage,
+        );
+      },
+    );
+  }
 }
 
 class _ShowAlertDialogState extends State<ShowAlertDialog> {
@@ -77,21 +94,4 @@ class _ShowAlertDialogState extends State<ShowAlertDialog> {
       ),
     );
   }
-
-  // void showAlertDialog(BuildContext context, Widget nextPage, String page,
-  //     String primaryText, String secondText, String urlImage) {
-  //   showDialog(
-  //     context: context,
-  //     builder: (BuildContext context) {
-  //       return ShowAlertDialog(
-  //         context: context,
-  //         nextPage: nextPage,
-  //         page: page,
-  //         primaryText: primaryText,
-  //         secondText: secondText,
-  //         urlImage: urlImage,
-  //       );
-  //     },
-  //   );
-  // }
 }

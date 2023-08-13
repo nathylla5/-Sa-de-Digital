@@ -48,7 +48,7 @@ class _DonationsViewState extends State<DonationsView> {
               color: Colors.cyan,
               onPressed: () {
                 Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => MenuView()),
+                  MaterialPageRoute(builder: (context) => const MenuView()),
                 );
               },
               icon: const Icon(

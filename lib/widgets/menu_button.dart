@@ -1,26 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/widgets/show_alert_dialog.dart';
-
-import 'card_image.dart';
+import 'package:flutter_application_2/widgets/card_image.dart';
 
 class MenuButton extends StatefulWidget {
   final dynamic backgroundColor;
   final String urlImage;
   final Widget nextPage;
   final String text;
-  final String page;
-  final String primaryText;
-  final String secondText;
 
   const MenuButton(
       {Key? key,
-      this.backgroundColor,
+      required this.backgroundColor,
       required this.urlImage,
       required this.nextPage,
-      required this.text,
-      required this.page,
-      required this.primaryText,
-      required this.secondText})
+      required this.text,})
       : super(key: key);
 
   @override
@@ -32,13 +24,8 @@ class _MenuButtonState extends State<MenuButton> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        ShowAlertDialog(
-          nextPage: widget.nextPage,
-          page: widget.page,
-          primaryText: widget.primaryText,
-          secondText: widget.secondText,
-          urlImage: widget.urlImage,
-          context: context,
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => widget.nextPage),
         );
       },
       child: Row(

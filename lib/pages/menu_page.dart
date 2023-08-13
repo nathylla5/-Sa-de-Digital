@@ -1,17 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/pages/alarm_page.dart';
 import 'package:flutter_application_2/pages/donations_page.dart';
 import 'package:flutter_application_2/pages/profile_page.dart';
+import 'package:flutter_application_2/pages/alarm_page.dart';
 import 'package:flutter_application_2/widgets/menu_button.dart';
-
-final constNames = [
-  'Alarmes',
-  'Remédios',
-  'Tabela',
-  'Doações',
-  'Unidades de Saúde',
-  'Ambulância'
-];
 
 class MenuView extends StatefulWidget {
   const MenuView({Key? key}) : super(key: key);
@@ -37,7 +28,7 @@ class _MenuViewState extends State<MenuView> {
             iconSize: 60,
             onPressed: () {
               Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => const ProfileView()),
+                MaterialPageRoute(builder: (context) => ProfileView()),
               );
             },
             icon: const Icon(
@@ -51,10 +42,7 @@ class _MenuViewState extends State<MenuView> {
             backgroundColor: backgroundColor,
             urlImage: 'assets/alarme.png',
             nextPage: const AlarmsView(),
-            text: constNames[0],
-            page: constNames[0],
-            primaryText: constNames[0],
-            secondText: 'Agende suas medicações',
+            text: 'Alarmes',
           ),
           SizedBox(height: heightSizedBox),
           MenuButton(
@@ -62,45 +50,35 @@ class _MenuViewState extends State<MenuView> {
               urlImage: 'assets/remedio.png',
               nextPage: const MenuView(),
               text: 'Remédios',
-              page: constNames[1],
-              primaryText: constNames[1],
-              secondText: ''),
+          ),
           SizedBox(height: heightSizedBox),
           MenuButton(
               backgroundColor: backgroundColor,
               urlImage: 'assets/tabela_lista.png',
               nextPage: const MenuView(),
               text: 'Tabela',
-              page: constNames[2],
-              primaryText: constNames[2],
-              secondText: ''),
+          ),
           SizedBox(height: heightSizedBox),
           MenuButton(
               backgroundColor: backgroundColor,
               urlImage: 'assets/caixa_doacao.png',
               nextPage: const DonationsView(),
               text: 'Doações',
-              page: constNames[3],
-              primaryText: constNames[3],
-              secondText: ''),
+          ),
           SizedBox(height: heightSizedBox),
           MenuButton(
               backgroundColor: backgroundColor,
               urlImage: 'assets/unidade_saude.png',
               nextPage: const MenuView(),
               text: 'Unidade de Saúde',
-              page: constNames[4],
-              primaryText: constNames[4],
-              secondText: ''),
+          ),
           SizedBox(height: heightSizedBox),
           MenuButton(
               backgroundColor: backgroundColor,
               urlImage: 'assets/ambulancia.png',
               nextPage: const MenuView(),
               text: 'Ambulância',
-              page: constNames[5],
-              primaryText: constNames[5],
-              secondText: ''),
+          ),
           SizedBox(height: heightSizedBox),
           Hero(
             tag: 'imageHero',

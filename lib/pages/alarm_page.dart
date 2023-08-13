@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/widgets/create_alarm.dart';
+
+import 'menu_page.dart';
 
 class AlarmsView extends StatefulWidget {
   const AlarmsView({Key? key}) : super(key: key);
@@ -9,7 +12,6 @@ class AlarmsView extends StatefulWidget {
 
 class _AlarmsViewState extends State<AlarmsView> {
   List<Widget> alarmsTiles = [];
-  List<bool> switchValues = [];
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,11 @@ class _AlarmsViewState extends State<AlarmsView> {
           child: IconButton(
               iconSize: 40,
               color: Colors.cyan,
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const MenuView()),
+                );
+              },
               icon: const Icon(
                 Icons.arrow_back_ios,
               )),
@@ -47,23 +53,8 @@ class _AlarmsViewState extends State<AlarmsView> {
 
   void addAlarmsTile() {
     setState(() {
-      switchValues.add(false);
-      alarmsTiles.add(
-        SwitchListTile(
-          title: const Text('8:55 AM',
-              style: TextStyle(color: Colors.cyan, fontSize: 15)),
-          subtitle:
-              const Text('ESTÁ NA HORA DO SEU REMÉDIO, (NOME DO REMÉDIO)'),
-          isThreeLine: true,
-          dense: true,
-          value: switchValues[alarmsTiles.length],
-          onChanged: (bool switchValue) {
-            setState(() {
-              switchValues[alarmsTiles.length] = switchValue;
-            });
-          },
-        ),
-      );
+      alarmsTiles
+          .add(const CreateAlarm(time: '22:00 AM', medicineName: 'GRIPEX'));
     });
   }
 }
