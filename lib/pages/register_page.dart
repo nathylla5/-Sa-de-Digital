@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../widgets/register_text_field.dart';
+import 'package:flutter_application_2/widgets/create_label.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({Key? key}) : super(key: key);
@@ -33,63 +32,68 @@ class _RegisterViewState extends State<RegisterView> {
                     alignment: Alignment.center,
                     child: Image.asset('assets/Logo.png'),
                   ),
-                  RegisterTextField(
-                    onChange: (text) {
-                      name = text;
-                    },
-                    icon: Icons.perm_identity_sharp,
-                    fillColor: const Color(0xFFA4D8E5),
-                    iconColor: Colors.white,
-                    labelText: 'Nome',
-                    labelColor: Colors.white,
-                  ),
+                  CreateLabel(
+                      onChanged: (text) {
+                        name = text;
+                      },
+                      icon: Icons.perm_identity_sharp,
+                      fillColor: const Color(0xFFA4D8E5),
+                      iconColor: Colors.white,
+                      labelText: 'Nome',
+                      labelColor: Colors.white,
+                      obscureText: false,
+                      horizonte:50),
+                      
                   const SizedBox(height: 10),
-                  RegisterTextField(
-                    onChange: (text) {
-                      email = text;
-                    },
-                    icon: Icons.email_outlined,
-                    fillColor: const Color(0xFFA4D8E5),
-                    iconColor: Colors.white,
-                    labelText: 'E-mail',
-                    labelColor: Colors.white,
-                  ),
+                  CreateLabel(
+                      onChanged: (text) {
+                        email = text;
+                      },
+                      icon: Icons.email_outlined,
+                      fillColor: const Color(0xFFA4D8E5),
+                      iconColor: Colors.white,
+                      labelText: 'E-mail',
+                      labelColor: Colors.white,
+                      obscureText: false,
+                      horizonte:50),
                   const SizedBox(height: 10),
-                  RegisterTextField(
-                    onChange: (text) {
-                      user = text;
-                    },
-                    icon: Icons.perm_identity_sharp,
-                    fillColor: const Color(0xFFA4D8E5),
-                    iconColor: Colors.white,
-                    labelText: 'Usuário',
-                    labelColor: Colors.white,
-                  ),
+                  CreateLabel(
+                      onChanged: (text) {
+                        user = text;
+                      },
+                      icon: Icons.perm_identity_sharp,
+                      fillColor: const Color(0xFFA4D8E5),
+                      iconColor: Colors.white,
+                      labelText: 'Usuário',
+                      labelColor: Colors.white,
+                      obscureText: false,
+                      horizonte:50),
                   const SizedBox(height: 10),
-                  RegisterTextField(
-                    onChange: (text) {
-                      password = text;
-                    },
-                    icon: Icons.lock_outline,
-                    fillColor: const Color(0xFFA4D8E5),
-                    iconColor: Colors.white,
-                    labelText: 'Senha',
-                    obscureText: true,
-                    labelColor: Colors.white,
-                  ),
-                  const SizedBox(height: 10),
-                  RegisterTextField(
-                      onChange: (text) {
-                        confirmPassword = text;
+                  CreateLabel(
+                      onChanged: (text) {
+                        password = text;
                       },
                       icon: Icons.lock_outline,
                       fillColor: const Color(0xFFA4D8E5),
                       iconColor: Colors.white,
+                      labelText: 'Senha',
+                      labelColor: Colors.white,
                       obscureText: true,
-                      labelText: 'Confirmar senha',
-                      labelColor: Colors.white),
+                      horizonte:50),
                   const SizedBox(height: 10),
-                  Container(
+                  CreateLabel(
+                      onChanged: (text) {
+                        password = text;
+                      },
+                      icon: Icons.lock_outline,
+                      fillColor: const Color(0xFFA4D8E5),
+                      iconColor: Colors.white,
+                      labelText: 'Confirmar senha',
+                      labelColor: Colors.white,
+                      obscureText: true,
+                      horizonte:50),
+                  const SizedBox(height: 10),
+                  SizedBox(
                     height: 45,
                     child: TextButton(
                       style: ElevatedButton.styleFrom(
