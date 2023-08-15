@@ -6,11 +6,13 @@ class User {
   final String email;
   final String date;
   final String password;
+  final String usuario;
 
   User(
       {required this.id,
       required this.email,
       required this.date,
       required this.password,
-      required this.name});
+      required this.name,
+      required this.usuario});
 }
