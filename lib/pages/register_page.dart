@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/widgets/create_label.dart';
+import 'package:flutter_application_2/db/dao/UserDao.dart';
+import 'package:flutter_application_2/domain/user.dart';
+import 'package:uuid/uuid.dart';
+
+import '../widgets/register_text_field.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({Key? key}) : super(key: key);
@@ -13,7 +17,7 @@ class _RegisterViewState extends State<RegisterView> {
   String password = '';
   String confirmPassword = '';
   String email = '';
-  String user = '';
+  String birthDate = '';
 
   @override
   Widget build(BuildContext context) {
@@ -32,68 +36,65 @@ class _RegisterViewState extends State<RegisterView> {
                     alignment: Alignment.center,
                     child: Image.asset('assets/Logo.png'),
                   ),
-                  CreateLabel(
-                      onChanged: (text) {
-                        name = text;
-                      },
-                      icon: Icons.perm_identity_sharp,
-                      fillColor: const Color(0xFFA4D8E5),
-                      iconColor: Colors.white,
-                      labelText: 'Nome',
-                      labelColor: Colors.white,
-                      obscureText: false,
-                      horizonte:50),
-                      
+                  RegisterTextField(
+                    onChange: (text) {
+                      name = text;
+                    },
+                    icon: Icons.perm_identity_sharp,
+                    fillColor: const Color(0xFFA4D8E5),
+                    iconColor: Colors.white,
+                    labelText: 'Nome completo',
+                    labelColor: Colors.white,
+                  ),
                   const SizedBox(height: 10),
-                  CreateLabel(
-                      onChanged: (text) {
-                        email = text;
-                      },
-                      icon: Icons.email_outlined,
-                      fillColor: const Color(0xFFA4D8E5),
-                      iconColor: Colors.white,
-                      labelText: 'E-mail',
-                      labelColor: Colors.white,
-                      obscureText: false,
-                      horizonte:50),
+                  RegisterTextField(
+                    onChange: (text) {
+                      email = text;
+                    },
+                    icon: Icons.email_outlined,
+                    fillColor: const Color(0xFFA4D8E5),
+                    iconColor: Colors.white,
+                    labelText: 'E-mail',
+                    labelColor: Colors.white,
+                  ),
                   const SizedBox(height: 10),
-                  CreateLabel(
-                      onChanged: (text) {
-                        user = text;
-                      },
-                      icon: Icons.perm_identity_sharp,
-                      fillColor: const Color(0xFFA4D8E5),
-                      iconColor: Colors.white,
-                      labelText: 'Usuário',
-                      labelColor: Colors.white,
-                      obscureText: false,
-                      horizonte:50),
+                  RegisterTextField(
+                    onChange: (text) {
+                      birthDate = text;
+                    },
+                    labelText: 'Data de nascimento',
+                    obscureText: false,
+                    labelColor: Colors.white,
+                    fillColor: const Color(0xFFA4D8E5),
+                    iconColor: Colors.white,
+                    icon: Icons.date_range,
+                  ),
                   const SizedBox(height: 10),
-                  CreateLabel(
-                      onChanged: (text) {
-                        password = text;
-                      },
-                      icon: Icons.lock_outline,
-                      fillColor: const Color(0xFFA4D8E5),
-                      iconColor: Colors.white,
-                      labelText: 'Senha',
-                      labelColor: Colors.white,
-                      obscureText: true,
-                      horizonte:50),
+                  RegisterTextField(
+                    onChange: (text) {
+                      password = text;
+                    },
+                    icon: Icons.lock_outline,
+                    fillColor: const Color(0xFFA4D8E5),
+                    iconColor: Colors.white,
+                    labelText: 'Senha',
+                    obscureText: true,
+                    labelColor: Colors.white,
+                  ),
                   const SizedBox(height: 10),
-                  CreateLabel(
-                      onChanged: (text) {
-                        password = text;
-                      },
-                      icon: Icons.lock_outline,
-                      fillColor: const Color(0xFFA4D8E5),
-                      iconColor: Colors.white,
-                      labelText: 'Confirmar senha',
-                      labelColor: Colors.white,
-                      obscureText: true,
-                      horizonte:50),
+                  RegisterTextField(
+                    onChange: (text) {
+                      confirmPassword = text;
+                    },
+                    icon: Icons.lock_outline,
+                    fillColor: const Color(0xFFA4D8E5),
+                    iconColor: Colors.white,
+                    obscureText: true,
+                    labelText: 'Confirmar senha',
+                    labelColor: Colors.white,
+                  ),
                   const SizedBox(height: 10),
-                  SizedBox(
+                  Container(
                     height: 45,
                     child: TextButton(
                       style: ElevatedButton.styleFrom(
@@ -103,7 +104,7 @@ class _RegisterViewState extends State<RegisterView> {
                         ),
                         padding: const EdgeInsets.symmetric(horizontal: 110.0),
                       ),
-                      onPressed: () {},
+                      onPressed: addUser,
                       child: const Text(
                         'Confirmar',
                         style: TextStyle(
@@ -121,5 +122,18 @@ class _RegisterViewState extends State<RegisterView> {
         ),
       ),
     );
+  }
+
+  void addUser() {
+    var uuid = const Uuid();
+    User user = User(
+      id: uuid.v1(),
+      email: email,
+      date: birthDate,
+      password: password,
+      name: name,
+    );
+    UserDao().insertUser(user);
+    print('Usuário inserido com sucesso!');
   }
 }

@@ -3,8 +3,6 @@ import 'package:flutter_application_2/pages/donations_page.dart';
 import 'package:flutter_application_2/pages/profile_page.dart';
 import 'package:flutter_application_2/pages/alarm_page.dart';
 import 'package:flutter_application_2/widgets/menu_button.dart';
-import 'package:flutter_application_2/pages/login_page.dart';
-import 'package:flutter_application_2/pages/profile_page.dart';
 
 final constNames = [
   'Alarmes',
