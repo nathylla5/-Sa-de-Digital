@@ -140,14 +140,15 @@ class _RegisterViewState extends State<RegisterView> {
 
   void addUser() {
     var uuid = const Uuid();
-    User user = User(
-      id: uuid.v1(),
-      email: email,
-      date: birthDate,
-      password: password,
-      name: name,
-      usuario: usuario,
-    );
+    final userBuilder = UserBuilder()
+        .withID(uuid.v1())
+        .withName(name)
+        .withEmail(email)
+        .withPassword(password)
+        .withDate(birthDate);
+
+    final user = userBuilder.build();
+
     UserDao().insertUser(user);
     print('Usuário inserido com sucesso!');
   }
