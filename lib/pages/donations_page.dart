@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/db/dao/donationDao.dart';
 import 'package:flutter_application_2/pages/menu_page.dart';
 import 'package:flutter_application_2/widgets/create_donation.dart';
 
+import '../db/dao/donation_dao.dart';
 import '../domain/donation.dart';
 
 class DonationsView extends StatefulWidget {
