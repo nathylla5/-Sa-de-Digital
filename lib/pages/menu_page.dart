@@ -29,17 +29,8 @@ class _MenuViewState extends State<MenuView> {
             onPressed: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                    builder: (context) => const ProfileView(
-                          patientName: 'Tarsis Marinho',
-                          username: 'tarsismarinho22',
-                          phoneNumber: '(82) 99999-9999',
-                          urlImage: 'assets/tarsis_sleepando.jpeg',
-                          diseases: ['Hipertensão', 'Diabetes'],
-                          completeName: 'Tarsis Marinheiro',
-                          birthDate: '12/02/1870',
-                          age: '37',
-                        )),
-              );
+                    builder: (context) => const ProfileView(),
+              ));
             },
             icon: const Icon(
               Icons.account_circle,

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/pages/menu_page.dart';
-import 'package:flutter_application_2/widgets/create_donation.dart';
 
 class DonationsView extends StatefulWidget {
   const DonationsView({Key? key}) : super(key: key);
@@ -10,13 +9,7 @@ class DonationsView extends StatefulWidget {
 }
 
 class _DonationsViewState extends State<DonationsView> {
-  List<Widget> donationTiles = [];
-
-  void addDonationTile() {
-    setState(() {
-      donationTiles.add(CreateDonation(quantity: 2, donationName: '', location: ''));
-    });
-  }
+  final List<Widget> donationTiles = [];
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +39,7 @@ class _DonationsViewState extends State<DonationsView> {
           IconButton(
               color: Colors.cyan,
               iconSize: 25,
-              onPressed: addDonationTile,
+              onPressed: () {},//addDonationTile,
               icon: const Icon(
                 Icons.add,
               ))

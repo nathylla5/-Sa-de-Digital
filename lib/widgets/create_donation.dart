@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 
+import '../domain/donation.dart';
+
 class CreateDonation extends StatefulWidget {
+  final Donation donation;
 
-  final String donationName;
-  final int quantity;
-  final String location;
-
-  const CreateDonation({Key? key, required this.quantity, required this.donationName, required this.location}) : super(key: key);
+  const CreateDonation({Key? key, required this.donation}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _CreateDonationState();
-
 }
 
 class _CreateDonationState extends State<CreateDonation> {
@@ -22,15 +20,14 @@ class _CreateDonationState extends State<CreateDonation> {
         color: Colors.cyan,
         size: 30,
       ),
-      title: Text('Nome da doação: ${widget.donationName}',
+      title: Text('Nome da doação: ${widget.donation.name}',
           style: const TextStyle(color: Colors.cyan, fontSize: 15)),
-      subtitle: Text('Local da doação: ${widget.location}'),
+      subtitle: Text('Local da doação: ${widget.donation.location}'),
       isThreeLine: true,
       onTap: () {},
       dense: true,
-      trailing: Text('Quantidade: ${widget.quantity}',
+      trailing: Text('Quantidade: ${widget.donation.numItens}',
           style: const TextStyle(color: Colors.cyan, fontSize: 15)),
     );
   }
-
 }
