@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_2/pages/menu_page.dart';
 import 'package:flutter_application_2/pages/register_page.dart';
 
+import '../widgets/create_label.dart';
+
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -11,6 +13,8 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   var _isChecked = false;
+  String usuario = 'AN';
+  String senha = 'ON';
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -29,49 +33,30 @@ class _LoginPageState extends State<LoginPage> {
                   width: 220,
                 )),
           ),
-          SizedBox(height: 40.0),
-          Container(
-              height: 44.0,
-              child: TextField(
-                style: TextStyle(fontSize: 15.0, color: Colors.black),
-                decoration: InputDecoration(
-                  hintText: 'Usuário',
-                  hintStyle: TextStyle(color: Colors.white),
-                  filled: true,
-                  fillColor: const Color(0x450292B7),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(50.0),
-                    borderSide: BorderSide.none,
-                  ),
-                  prefixIcon: Padding(
-                    child: Icon(Icons.person_2_outlined, color: Colors.white),
-                    padding: EdgeInsets.all(5),
-                  ),
-                ),
-              )),
-          SizedBox(height: 20.0),
-          Container(
-              height: 44.0,
-              child: TextField(
-                textAlignVertical: TextAlignVertical.center,
-                style: TextStyle(
-                  fontSize: 15.0,
-                ),
-                decoration: InputDecoration(
-                  hintText: 'Senha',
-                  hintStyle: TextStyle(color: Colors.white),
-                  filled: true,
-                  fillColor: const Color(0x450292B7),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(50.0),
-                    borderSide: BorderSide.none,
-                  ),
-                  prefixIcon: Padding(
-                    child: Icon(Icons.lock_outline, color: Colors.white),
-                    padding: EdgeInsets.all(5),
-                  ),
-                ),
-              )),
+          SizedBox(height: 10),
+          CreateLabel(
+              onChanged: (text) {
+                usuario = text;
+              },
+              icon: Icons.perm_identity_sharp,
+              fillColor: const Color(0xFFA4D8E5),
+              iconColor: Colors.white,
+              labelText: 'Usuário',
+              labelColor: Colors.white,
+              obscureText: false,
+              horizonte: 15),
+          SizedBox(height: 10),
+          CreateLabel(
+              onChanged: (text) {
+                senha = text;
+              },
+              icon: Icons.lock_outline,
+              fillColor: const Color(0xFFA4D8E5),
+              iconColor: Colors.white,
+              labelText: 'Senha',
+              labelColor: Colors.white,
+              obscureText: true,
+              horizonte: 15),
           Container(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
