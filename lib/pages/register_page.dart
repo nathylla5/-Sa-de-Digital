@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/domain/user.dart';
+import 'package:flutter_application_2/pages/login_page.dart';
+import 'package:flutter_application_2/widgets/show_dialog.dart';
 import 'package:uuid/uuid.dart';
-
 import '../db/dao/user_dao.dart';
-import '../widgets/register_text_field.dart';
 import '../widgets/create_label.dart';
 
 class RegisterView extends StatefulWidget {
@@ -75,7 +75,8 @@ class _RegisterViewState extends State<RegisterView> {
                 obscureText: false,
                 horizonte: 15,
               ),
-              const SizedBox(height: 10),
+              const SizedBox(
+                height: 10),
               CreateLabel(
                 onChanged: (text) {
                   password = text;
@@ -85,7 +86,7 @@ class _RegisterViewState extends State<RegisterView> {
                 iconColor: Colors.white,
                 labelText: 'Senha',
                 labelColor: Colors.white,
-                obscureText: false,
+                obscureText: true,
                 horizonte: 15,
               ),
               const SizedBox(height: 10),
@@ -98,7 +99,7 @@ class _RegisterViewState extends State<RegisterView> {
                 iconColor: Colors.white,
                 labelText: 'Confirme a senha',
                 labelColor: Colors.white,
-                obscureText: false,
+                obscureText: true,
                 horizonte: 15,
               ),
               const SizedBox(height: 10),
@@ -113,34 +114,32 @@ class _RegisterViewState extends State<RegisterView> {
                 labelColor: Colors.white,
                 obscureText: false,
                 horizonte: 15,
-              ),     
+              ),
               Container(
                 height: 45,
                 child: TextButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF0292B7),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
+                      borderRadius: BorderRadius.circular(50),
                     ),
                     padding: const EdgeInsets.symmetric(horizontal: 110.0),
                   ),
-                  onPressed: addUser,
-                  child: const Text(
+                  child: Text(
                     'Confirmar',
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
+                    style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
                   ),
+                  onPressed: addUser,
                 ),
               ),
-              const SizedBox(height: 40),
+              SizedBox(height: 40),
             ],
           ))
     ])));
   }
 
-  void addUser() {
+  void addUser() async {
+    print("Clique sucesso!");
     var uuid = const Uuid();
     final userBuilder = UserBuilder()
         .withID(uuid.v1())
@@ -152,6 +151,18 @@ class _RegisterViewState extends State<RegisterView> {
     final user = userBuilder.build();
 
     UserDao().insertUser(user);
-    print('Usuário inserido com sucesso!');
+    showDialog(
+      context: context,
+      builder: (context) {
+        return SuccessRegisterDialog(
+          context: context,
+          //urlImage: "",
+          primaryText: "SUCESSO!",
+          secondText: "Sua conta foi criada!",
+          page: "login",
+          nextPage: LoginPage(),
+        );
+      },
+    );
   }
 }

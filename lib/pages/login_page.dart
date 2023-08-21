@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/db/dao/user_dao.dart';
 import 'package:flutter_application_2/pages/menu_page.dart';
 import 'package:flutter_application_2/pages/register_page.dart';
 
@@ -13,8 +14,22 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   var _isChecked = false;
-  String usuario = 'AN';
-  String senha = 'ON';
+  String usuario = '';
+  String senha = '';
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    loadUsers();
+  }
+
+  void loadUsers() {
+    var data = new UserDao().getInfoProfile(usuario);
+    print(data.toString());
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -30,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
                 tag: 'imageHero',
                 child: Image.asset(
                   'assets/Logo.png',
-                  width: 220,
+                  width: 320,
                 )),
           ),
           SizedBox(height: 10),
@@ -44,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
               labelText: 'Usuário',
               labelColor: Colors.white,
               obscureText: false,
-              horizonte: 15),
+              horizonte: 10),
           SizedBox(height: 10),
           CreateLabel(
               onChanged: (text) {
@@ -56,7 +71,7 @@ class _LoginPageState extends State<LoginPage> {
               labelText: 'Senha',
               labelColor: Colors.white,
               obscureText: true,
-              horizonte: 15),
+              horizonte: 10),
           Container(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -71,7 +86,6 @@ class _LoginPageState extends State<LoginPage> {
               ],
             ),
           ),
-          SizedBox(height: 20.0),
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(50.0),
@@ -93,8 +107,7 @@ class _LoginPageState extends State<LoginPage> {
                   .leading, //  <-- Define posição do checkbox
             ),
           ),
-          SizedBox(height: 20.0),
-          Container(
+          SizedBox(
             width: double.infinity,
             child: TextButton(
               style: ElevatedButton.styleFrom(
