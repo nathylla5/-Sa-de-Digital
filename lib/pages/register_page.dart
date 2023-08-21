@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/db/dao/UserDao.dart';
 import 'package:flutter_application_2/domain/user.dart';
 import 'package:uuid/uuid.dart';
+
+import '../db/dao/user_dao.dart';
+import '../widgets/register_text_field.dart';
 import '../widgets/create_label.dart';
 
 class RegisterView extends StatefulWidget {

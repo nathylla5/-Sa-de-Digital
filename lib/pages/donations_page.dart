@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/pages/menu_page.dart';
+import 'package:flutter_application_2/widgets/create_donation.dart';
+
+import '../db/dao/donation_dao.dart';
+import '../domain/donation.dart';
 
 class DonationsView extends StatefulWidget {
   const DonationsView({Key? key}) : super(key: key);
@@ -9,7 +13,9 @@ class DonationsView extends StatefulWidget {
 }
 
 class _DonationsViewState extends State<DonationsView> {
-  final List<Widget> donationTiles = [];
+  List<Donation> donationsList = [];
+  Future<List<Donation>> futureDonations = DonationDao().findAll();
+  var count = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -39,17 +45,45 @@ class _DonationsViewState extends State<DonationsView> {
           IconButton(
               color: Colors.cyan,
               iconSize: 25,
-              onPressed: () {},//addDonationTile,
+              onPressed: () async {
+                Donation newDonation = DonationBuilder()
+                    .withLocation('Hospital X')
+                    .withNumItems(count++)
+                    .withName('Remédio Y')
+                    .build();
+                await DonationDao().addDonation(newDonation);
+
+                setState(() {
+                  donationsList.add(newDonation);
+                });
+              },
               icon: const Icon(
                 Icons.add,
               ))
         ],
       ),
-      body: ListView(children: [
-        Column(
-          children: donationTiles,
-        )
-      ]),
+      body: FutureBuilder<List<Donation>>(
+        future: futureDonations,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasData) {
+            List<Donation> combinedList = [...snapshot.data!, ...donationsList];
+
+            return ListView.builder(
+              itemCount: combinedList.length,
+              itemBuilder: (context, index) {
+                return CreateDonation(donation: combinedList[index]);
+              },
+            );
+          }
+
+          return const Padding(
+            padding: EdgeInsets.only(top: 50),
+            child: Center(child: CircularProgressIndicator()),
+          );
+        },
+      ),
     );
   }
 }

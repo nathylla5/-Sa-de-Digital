@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/db/dao/UserDao.dart';
 
+import '../db/dao/user_dao.dart';
 import '../domain/user.dart';
 
 class ProfileView extends StatefulWidget {

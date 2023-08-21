@@ -25,8 +25,8 @@ class _CreateDonationState extends State<CreateDonation> {
       subtitle: Text('Local da doação: ${widget.donation.location}'),
       isThreeLine: true,
       onTap: () {},
-      dense: true,
-      trailing: Text('Quantidade: ${widget.donation.numItens}',
+      //dense: true,
+      trailing: Text('Quantidade: ${widget.donation.numItems}',
           style: const TextStyle(color: Colors.cyan, fontSize: 15)),
     );
   }
