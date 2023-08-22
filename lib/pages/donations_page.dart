@@ -51,11 +51,13 @@ class _DonationsViewState extends State<DonationsView> {
                     .withNumItems(count++)
                     .withName('Remédio Y')
                     .build();
+
                 await DonationDao().addDonation(newDonation);
 
                 setState(() {
                   donationsList.add(newDonation);
                 });
+
               },
               icon: const Icon(
                 Icons.add,

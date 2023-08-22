@@ -2,7 +2,7 @@
 import '../../domain/donation.dart';
 
 class DonationDao {
-  List<Donation> donations = [
+  static List<Donation> donations = [
     DonationBuilder().withLocation('Hospital X').withNumItems(30).withName('Remédio X').build(),
     DonationBuilder().withLocation('Hospital Y').withNumItems(40).withName('Remédio Y').build(),
     DonationBuilder().withLocation('Hospital Z').withNumItems(50).withName('Remédio Z').build()

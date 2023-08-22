@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 
-import '../db/dao/medicamentos_dao.dart';
+import '../db/dao/medicamento_dao.dart';
 import '../domain/medicamentos.dart';
 import '../widgets/remedios.dart';
 
-class MedicamentoPage extends StatelessWidget {
-  final Future<List<Medicamento>> futureListaMedicamentos = PacoteDao().findAll();
+class MedicamentoPage extends StatefulWidget {
+  const MedicamentoPage({Key? key}) : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() => _MedicamentoPageState();
+
+}
+
+class _MedicamentoPageState extends State<MedicamentoPage> {
+  Future<List<Medicamento>> futureListaMedicamentos = MedicamentoDao().findAll();
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +21,7 @@ class MedicamentoPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        title: Center(
+        title: const Center(
           child: Text(
             'Medicamentos',
             style: TextStyle(
@@ -22,7 +30,7 @@ class MedicamentoPage extends StatelessWidget {
           ),
         ),
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
             color: Color(0xFF1AC8DB),
           ),
@@ -43,7 +51,7 @@ class MedicamentoPage extends StatelessWidget {
                 itemCount: listaMedicamentos.length,
                 itemBuilder: (context, i) {
                   return Container(
-                    margin: EdgeInsets.only(bottom: 10),
+                    margin: const EdgeInsets.only(bottom: 10),
                     child: Remedios(med: listaMedicamentos[i]),
                   );
                 },

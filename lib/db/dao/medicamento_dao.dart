@@ -1,7 +1,7 @@
 
 import '../../domain/medicamentos.dart';
 
-class PacoteDao {
+class MedicamentoDao {
   final List<Medicamento> listaMedicamentos = [
     Medicamento(
       nome: 'Tylenol',
