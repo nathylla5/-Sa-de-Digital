@@ -67,9 +67,7 @@ class _DonationsViewState extends State<DonationsView> {
       body: FutureBuilder<List<Donation>>(
         future: futureDonations,
         builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasData) {
+          if (snapshot.hasData) {
             List<Donation> combinedList = [...snapshot.data!, ...donationsList];
 
             return ListView.builder(

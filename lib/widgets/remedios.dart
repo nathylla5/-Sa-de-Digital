@@ -16,7 +16,7 @@ class _RemediosState extends State<Remedios> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.only(top: 16),
+      margin: const EdgeInsets.only(top: 16),
       color: Colors.white,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -24,7 +24,7 @@ class _RemediosState extends State<Remedios> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(4)),
+              borderRadius: const BorderRadius.all(Radius.circular(4)),
               child: Image.asset(
                 widget.med.imagemAssetPath,
                 height: 80,
@@ -32,20 +32,20 @@ class _RemediosState extends State<Remedios> {
                 fit: BoxFit.contain,
               ),
             ),
-            SizedBox(width: 30),
+            const SizedBox(width: 30),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     widget.med.nome,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Color(0xFF0292B7),
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   GestureDetector(
                     onTap: () {
                       Navigator.push(
@@ -57,7 +57,7 @@ class _RemediosState extends State<Remedios> {
                         ),
                       );
                     },
-                    child: Text(
+                    child: const Text(
                       "Acesse as informações aqui",
                       style: TextStyle(
                         color: Color(0xFFA6A6A6),
