@@ -24,12 +24,13 @@ class _DetalhesPageState extends State<DetalhesPage> {
               child: Row(
                 children: [
                   IconButton(
-                    icon: Icon(Icons.arrow_back, color: Color(0xFF1AC8DB)),
+                    icon:
+                        const Icon(Icons.arrow_back, color: Color(0xFF1AC8DB)),
                     onPressed: () {
                       Navigator.pop(context);
                     },
                   ),
-                  Expanded(child: SizedBox()), 
+                  const Expanded(child: SizedBox()),
                 ],
               ),
             ),
@@ -37,7 +38,7 @@ class _DetalhesPageState extends State<DetalhesPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   Center(
                     child: Image.asset(
                       widget.med.imagemAssetPath,
@@ -46,13 +47,13 @@ class _DetalhesPageState extends State<DetalhesPage> {
                       fit: BoxFit.contain,
                     ),
                   ),
-                  SizedBox(height: 24),
+                  const SizedBox(height: 24),
                   Center(
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Text(
                         widget.med.nome,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Color(0xFF0292B7),
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
@@ -61,9 +62,9 @@ class _DetalhesPageState extends State<DetalhesPage> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 18),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 30),
+                  const SizedBox(height: 18),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 30),
                     child: Text(
                       "Descrição",
                       style: TextStyle(
@@ -72,9 +73,19 @@ class _DetalhesPageState extends State<DetalhesPage> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(
+                    height: 8,
+                  ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 30),
+                    child: Text(
+                      widget.med.descricao,
+                      style: const TextStyle(color: Color(0xFFA6A6A6), fontSize: 14),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 30),
                     child: Text(
                       "Componentes",
                       style: TextStyle(
@@ -83,20 +94,20 @@ class _DetalhesPageState extends State<DetalhesPage> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 30),
                     child: Text(
                       widget.med.componentes,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Color(0xFFA6A6A6),
                         fontSize: 14,
                       ),
                     ),
                   ),
-                  SizedBox(height: 16),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 30),
+                  const SizedBox(height: 16),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 30),
                     child: Text(
                       "Efeitos",
                       style: TextStyle(
@@ -105,18 +116,18 @@ class _DetalhesPageState extends State<DetalhesPage> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 30),
                     child: Text(
                       widget.med.efeitos,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Color(0xFFA6A6A6),
                         fontSize: 14,
                       ),
                     ),
                   ),
-                  SizedBox(height: 24),
+                  const SizedBox(height: 24),
                 ],
               ),
             ),

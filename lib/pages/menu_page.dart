@@ -4,6 +4,8 @@ import 'package:flutter_application_2/pages/alarm_page.dart';
 import 'package:flutter_application_2/pages/donations_page.dart';
 import 'package:flutter_application_2/pages/login_page.dart';
 import 'package:flutter_application_2/pages/profile_page.dart';
+import 'package:flutter_application_2/pages/medicamentos_page.dart';
+import 'package:flutter_application_2/pages/hospital_page.dart';
 import 'package:flutter_application_2/widgets/menu_button.dart';
 import 'package:provider/provider.dart';
 
@@ -72,7 +74,7 @@ class _MenuViewState extends State<MenuView> {
           MenuButton(
             backgroundColor: backgroundColor,
             urlImage: 'assets/remedio.png',
-            nextPage: const MenuView(),
+            nextPage: const MedicamentoPage(),
             text: 'Remédios',
           ),
           SizedBox(height: heightSizedBox),
@@ -93,7 +95,7 @@ class _MenuViewState extends State<MenuView> {
           MenuButton(
             backgroundColor: backgroundColor,
             urlImage: 'assets/unidade_saude.png',
-            nextPage: const MenuView(),
+            nextPage: const HospitalPage(),
             text: 'Unidade de Saúde',
           ),
           SizedBox(height: heightSizedBox),
