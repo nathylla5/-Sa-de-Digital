@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/db/dao/user_dao.dart';
-import 'package:flutter_application_2/pages/menu_page.dart';
-import 'package:flutter_application_2/pages/register_page.dart';
+import 'package:provider/provider.dart';
 
+import '../db/services/auth_service.dart';
 import '../widgets/create_label.dart';
+import '../widgets/show_dialog.dart';
+import 'menu_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -14,142 +15,295 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   var _isChecked = false;
-  String usuario = '';
-  String senha = '';
+  final formKey = GlobalKey<FormState>();
+  final usuario = TextEditingController();
+  final senha = TextEditingController();
+  final name = TextEditingController();
+  final confPassword = TextEditingController();
+  final email = TextEditingController();
+  final birthDate = TextEditingController();
+
+  bool _isLogin = true;
+  //true para login, falso para cadastro
+  late String toggleButton;
+  late String actionButon;
+  bool loading = false;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-
-    loadUsers();
+    toggleButton = 'Não tenho conta';
+    actionButon = 'Entrar';
   }
 
-  void loadUsers() {
-    var data = new UserDao().getInfoProfile(usuario);
-    print(data.toString());
+  void _toggleForm() {
+    setState(() {
+      _isLogin = !_isLogin;
+      if (_isLogin) {
+        toggleButton = 'Não tenho conta';
+        actionButon = 'Entrar';
+      } else {
+        toggleButton = 'Já tenho conta';
+        actionButon = 'Cadastrar';
+      }
+    });
   }
 
+  login() async {
+    setState(() => loading = true);
+    try {
+      var user =
+          await context.read<AuthService>().login(email.text, senha.text);
+      if (user != null) {
+        goToHome();
+      }
+    } on AuthException catch (e) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(e.message)));
+    } /*finally {
+      setState(() => loading = false);
+    }*/
+  }
+
+  registrar() async {
+    setState(() => loading = true);
+    try {
+      var user =
+          await context.read<AuthService>().registrar(email.text, senha.text);
+      if (user != null) {
+        goToHome();
+      }
+    } on AuthException catch (e) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(e.message)));
+    } finally {
+      setState(() => loading = false);
+    }
+  }
+
+  void goToHome() {
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) {
+      return const MenuView();
+    }));
+  }
+
+//Future loginUser(String user, String password) async{
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Scaffold(
-            body: Container(
-      margin: EdgeInsets.all(40.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Flexible(
-            flex: 1,
-            child: Hero(
-                tag: 'imageHero',
-                child: Image.asset(
-                  'assets/Logo.png',
-                  width: 320,
-                )),
-          ),
-          SizedBox(height: 10),
-          CreateLabel(
-              onChanged: (text) {
-                usuario = text;
-              },
-              icon: Icons.perm_identity_sharp,
-              fillColor: const Color(0xFFA4D8E5),
-              iconColor: Colors.white,
-              labelText: 'Usuário',
-              labelColor: Colors.white,
-              obscureText: false,
-              horizonte: 10),
-          SizedBox(height: 10),
-          CreateLabel(
-              onChanged: (text) {
-                senha = text;
-              },
-              icon: Icons.lock_outline,
-              fillColor: const Color(0xFFA4D8E5),
-              iconColor: Colors.white,
-              labelText: 'Senha',
-              labelColor: Colors.white,
-              obscureText: true,
-              horizonte: 10),
-          Container(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+      child: Scaffold(
+        body: ListView(children: [
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 40.0, vertical: 125),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    'Esqueceu a senha?',
-                    style: TextStyle(color: const Color(0xFF0292B7)),
+                Form(
+                  key: formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Column(
+                        children: [
+                          Stack(
+                            children: [
+                              const Center(
+                                child: Text('Bem vindo ao',
+                                    style: TextStyle(
+                                      fontSize: 45,
+                                      fontWeight: FontWeight.w300,
+                                      letterSpacing: 1.5,
+                                      color: Color(0xFF0292B7),
+                                    )),
+                              ),
+                              Hero(
+                                  tag: 'imageHero',
+                                  child: Image.asset(
+                                    'assets/Logo.png',
+                                    width: 320,
+                                  )),
+                            ],
+                          )
+                        ],
+                      ),
+                      Container(
+                        child: page(),
+                      ),
+                    ],
                   ),
-                )
+                ),
               ],
             ),
           ),
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(50.0),
-            ),
-            child: CheckboxListTile(
-              title: Text('Aceito os termos de uso'),
-              enabled: true,
-              dense: true,
-              activeColor: const Color(0xFF0292B7),
-              checkColor: Colors.white,
-              side: BorderSide(color: const Color(0xFF0292B7)),
-              value: _isChecked,
-              onChanged: (newValue) {
-                setState(() {
-                  _isChecked = newValue!;
-                });
-              },
-              controlAffinity: ListTileControlAffinity
-                  .leading, //  <-- Define posição do checkbox
-            ),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: TextButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFF0292B7),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(50),
-                ),
-              ),
-              onPressed: () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) {
-                  return const MenuView();
-                }));
-              },
-              child: Text(
-                'Entrar',
-                style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
-              ),
-            ),
-          ),
-          Container(
-              width: double.infinity,
-              child: TextButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFF0292B7),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                ),
-                onPressed: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) {
-                    return const RegisterView();
-                  }));
-                },
-                child: Text(
-                  'Cadastrar',
-                  style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
-                ),
-              )),
-        ],
+        ]),
       ),
-    )));
+    );
+  }
+
+  Widget label() {
+    return Column(children: [
+      CreateLabel(
+        onControll: email,
+        icon: Icons.mail_outline,
+        fillColor: const Color(0xFFA4D8E5),
+        iconColor: Colors.white,
+        labelText: 'Usuário',
+        labelColor: Colors.white,
+        obscureText: false,
+        horizonte: 5,
+        tipo: TextInputType.emailAddress,
+        tamanho: 0,
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Campo obrigatório';
+          } else if (value.isEmpty) {
+            return 'Informe o email corretamente!';
+          }
+          return null;
+        },
+      ),
+      CreateLabel(
+        onControll: senha,
+        icon: Icons.lock_outline,
+        fillColor: const Color(0xFFA4D8E5),
+        iconColor: Colors.white,
+        labelText: 'Senha',
+        labelColor: Colors.white,
+        obscureText: true,
+        horizonte: 5,
+        tipo: TextInputType.visiblePassword,
+        tamanho: 6,
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Campo obrigatório';
+          } else if (value.length < 6) {
+            return 'A senha deve ter no mínimo 6 caracteres!';
+          }
+          return null;
+        },
+      ),
+    ]);
+  }
+
+  Widget signin() {
+    return Column(
+      children: [
+        SizedBox(height: 10),
+        label(),
+        Container(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              TextButton(
+                onPressed: () {},
+                child: Text(
+                  'Esqueceu a senha?',
+                  style: TextStyle(color: const Color(0xFF0292B7)),
+                ),
+              ),
+              TextButton(
+                  onPressed: _toggleForm,
+                  child: Text(
+                    toggleButton,
+                    style: TextStyle(color: const Color(0xFF0292B7)),
+                  ))
+            ],
+          ),
+        ),
+        submitButton(),
+      ],
+    );
+  }
+
+  Widget submitButton() {
+    return SizedBox(
+      width: double.infinity,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: const Color(0xFF0292B7),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(50),
+          ),
+        ),
+        onPressed: () {
+          if (formKey.currentState!.validate()) {
+            if (_isLogin) {
+              login();
+            } else {
+              registrar();
+            }
+          }
+        },
+        child: Text(
+          actionButon,
+          style: const TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+        ),
+      ),
+    );
+  }
+
+  Widget signup() {
+    return Column(
+      children: [
+        label(),
+        Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+          TextButton(
+              onPressed: _toggleForm,
+              child: Text(
+                toggleButton,
+                style: TextStyle(color: const Color(0xFF0292B7)),
+              ))
+        ]),
+        const SizedBox(height: 10),
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(50.0),
+          ),
+          child: CheckboxListTile(
+            title: const Text('Aceito os termos de uso'),
+            enabled: true,
+            dense: true,
+            activeColor: const Color(0xFF0292B7),
+            checkColor: Colors.white,
+            side: const BorderSide(color: Color(0xFF0292B7)),
+            value: _isChecked,
+            onChanged: (newValue) {
+              setState(() {
+                _isChecked = newValue!;
+              });
+            },
+            controlAffinity: ListTileControlAffinity
+                .leading, //  <-- Define posição do checkbox
+          ),
+        ),
+        submitButton(),
+      ],
+    );
+  }
+
+  Widget? page() {
+    if (_isLogin) {
+      return signin();
+    } else {
+      return signup();
+    }
+  }
+
+  void dialog() async {
+    print("Clique sucesso!");
+    showDialog(
+      context: context,
+      builder: (context) {
+        return SuccessRegisterDialog(
+          context: context,
+          //urlImage: "",
+          primaryText: "SUCESSO!",
+          secondText: "Sua conta foi criada!",
+          page: "login",
+          nextPage: LoginPage(),
+        );
+      },
+    );
   }
 }
