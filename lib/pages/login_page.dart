@@ -22,13 +22,13 @@ class _LoginPageState extends State<LoginPage> {
     // TODO: implement initState
     super.initState();
 
-    loadUsers();
+    //loadUsers();
   }
 
-  void loadUsers() {
-    var data = new UserDao().getInfoProfile(usuario);
-    print(data.toString());
-  }
+  //void loadUsers() {
+  //  var data = new UserDao().getInfoProfile(usuario);
+  //  print(data.toString());
+  //}
 
   @override
   Widget build(BuildContext context) {

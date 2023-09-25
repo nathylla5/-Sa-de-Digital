@@ -13,12 +13,11 @@ class DonationsView extends StatefulWidget {
 }
 
 class _DonationsViewState extends State<DonationsView> {
-  List<Donation> donationsList = [];
   Future<List<Donation>> futureDonations = DonationDao().findAll();
-  var count = 0;
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 80,
@@ -45,19 +44,9 @@ class _DonationsViewState extends State<DonationsView> {
           IconButton(
               color: Colors.cyan,
               iconSize: 25,
-              onPressed: () async {
-                Donation newDonation = DonationBuilder()
-                    .withLocation('Hospital X')
-                    .withNumItems(count++)
-                    .withName('Remédio Y')
-                    .build();
-
-                await DonationDao().addDonation(newDonation);
-
-                setState(() {
-                  donationsList.add(newDonation);
-                });
-
+              onPressed: () {
+                //Navigator.of(context).push(
+                //    MaterialPageRoute(builder: (context) => null),);
               },
               icon: const Icon(
                 Icons.add,
@@ -68,12 +57,12 @@ class _DonationsViewState extends State<DonationsView> {
         future: futureDonations,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            List<Donation> combinedList = [...snapshot.data!, ...donationsList];
+            List<Donation> donations = snapshot.data!;
 
             return ListView.builder(
-              itemCount: combinedList.length,
+              itemCount: donations.length,
               itemBuilder: (context, index) {
-                return CreateDonation(donation: combinedList[index]);
+                return CreateDonation(donation: donations[index]);
               },
             );
           }

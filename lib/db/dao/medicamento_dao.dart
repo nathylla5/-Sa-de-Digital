@@ -2,7 +2,7 @@
 import '../../domain/medicamentos.dart';
 
 class MedicamentoDao {
-  final List<Medicamento> listaMedicamentos = [
+   List<Medicamento> listaMedicamentos = const [
     Medicamento(
       nome: 'Tylenol',
       imagemAssetPath: 'assets/medicamento6.png',

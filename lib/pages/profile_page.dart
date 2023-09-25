@@ -11,7 +11,7 @@ class ProfileView extends StatefulWidget {
 }
 
 class _ProfileViewState extends State<ProfileView> {
-  Future<User> userProfile = UserDao().getInfoProfile('@tarsis_marinheiro');
+  Future<User> userProfile = UserDao().getInfoProfile('@tarsis_marinheiro', 'tarsis@ifal.edu.br');
   final endDate = DateTime.now().add(const Duration(days: 30));
 
   @override
@@ -192,7 +192,7 @@ class _ProfileViewState extends State<ProfileView> {
                     Text('Data de Nascimento:',
                         style:
                             TextStyle(fontSize: 18, color: Colors.cyan[300])),
-                    Text(profile.date,
+                    Text(profile.birthDate,
                         style:
                             const TextStyle(fontSize: 16, color: Colors.grey)),
                     Text('Idade:',
