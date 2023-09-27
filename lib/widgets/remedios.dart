@@ -26,7 +26,7 @@ class _RemediosState extends State<Remedios> {
             ClipRRect(
               borderRadius: const BorderRadius.all(Radius.circular(4)),
               child: Image.asset(
-                widget.med.imagemAssetPath,
+                widget.med.imagem,
                 height: 80,
                 width: 80,
                 fit: BoxFit.contain,

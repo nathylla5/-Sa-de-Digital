@@ -1,20 +1,34 @@
 
+import 'package:flutter_application_2/db/db_helper/database_service.dart';
+import 'package:sqflite/sqflite.dart' as sqlite;
+
 import '../../domain/donation.dart';
+import '../db_helper/database_helper.dart';
 
 class DonationDao {
-  List<Donation> donations = [
-    DonationBuilder().withLocation('Hospital X').withNumItems(30).withName('Remédio X').build(),
-    DonationBuilder().withLocation('Hospital Y').withNumItems(40).withName('Remédio Y').build(),
-    DonationBuilder().withLocation('Hospital Z').withNumItems(50).withName('Remédio Z').build()
-  ];
 
-  Future<void> addDonation(Donation newDonation) async {
-    await Future.delayed(const Duration(seconds: 2));
-    donations.add(newDonation);
-  }
+  Donation donation = DonationBuilder().withLocation('Hospital X').withNumItems(30).withName('Remédio X').build();
+
+  String dbName = 'saude_digital';
+  String tableName = 'donation';
+  String sqlFields = 'name TEXT NOT NULL, location TEXT NOT NULL, numItems INTEGER NOT NULL';
 
   Future<List<Donation>> findAll() async {
-    await Future.delayed(const Duration(seconds: 2));
-    return donations;
+    DatabaseHelper dbHelper = DatabaseHelper(dbName: dbName, tableName: tableName, sqlFields: sqlFields);
+    sqlite.Database database = await dbHelper.initialize();
+    DatabaseService.createTable(database, tableName, sqlFields);
+    database.insert(tableName, donation.toJson());
+
+    String sql = 'SELECT * FROM donation;';
+    final resultSet = await database.rawQuery(sql);
+    print('teste resultset $resultSet');
+
+    List<Donation> list = [];
+    for (var json in resultSet) {
+      var newDonation = Donation.fromJson(json);
+      list.add(newDonation);
+    }
+
+    return list;
   }
 }

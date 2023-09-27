@@ -1,15 +1,34 @@
 class Medicamento {
-  final String nome;
-  final String efeitos;
-  final String descricao;
-  final String componentes;
-  final String imagemAssetPath;
+  late String nome;
+  late String imagem;
+  late String efeitos;
+  late String descricao;
+  late String componentes;
 
-  const Medicamento({
+  Medicamento({
     required this.nome,
+    required this.imagem,
     required this.efeitos,
     required this.descricao,
     required this.componentes,
-    required this.imagemAssetPath,
   }) ;
+
+  Medicamento.fromJson(Map<String, dynamic> json) {
+    nome = json['nome'];
+    imagem = json['imagem'];
+    efeitos = json['efeitos'];
+    descricao = json['descricao'];
+    componentes = json['componentes'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+
+    data['nome'] = this.nome;
+    data['imagem'] = this.imagem;
+    data['efeitos'] = this.efeitos;
+    data['descricao'] = this.descricao;
+    data['componentes'] = this.componentes;
+    return data;
+  }
 }
