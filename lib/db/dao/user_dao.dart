@@ -10,14 +10,6 @@ import '../db_helper/database_service.dart';
 class UserDao {
   final _baseUrl = 'https://saude-digital-14b47-default-rtdb.firebaseio.com';
 
-  User userNull = UserBuilder()
-      .withName('')
-      .withImage('')
-      .withDate('')
-      .withUsername('')
-      .withEmail('')
-      .withDiseases('').build();
-
   User user = UserBuilder()
       .withID('12')
       .withName('Tarsis Marinho')
@@ -40,35 +32,27 @@ class UserDao {
         }));
   }
 
-  Future<User> getInfoProfile(String username, String email) async {
+  String dbName = 'saude_digital';
+  String tableName = 'user';
+  String sqlFields = 'id TEXT NOT NULL PRIMARY KEY, name TEXT NOT NULL, username TEXT NOT NULL, birthDate TEXT NOT NULL, password TEXT NOT NULL, urlImage TEXT NOT NULL, email TEXT NOT NULL, diseases TEXT NOT NULL';
 
-    print('teste user ${user.toJson()}');
+  Future<User> getInfoProfile(String username) async {
 
-    String dbName = 'us';
-    String tableName = 'user';
-    String sqlFields = 'id TEXT NOT NULL PRIMARY KEY, name TEXT NOT NULL, username TEXT NOT NULL, birthDate TEXT NOT NULL, password TEXT NOT NULL, urlImage TEXT NOT NULL, email TEXT NOT NULL, diseases TEXT NOT NULL';
     DatabaseHelper dbHelper = DatabaseHelper(dbName: dbName, tableName: tableName, sqlFields: sqlFields);
     Database database = await dbHelper.initialize();
+    DatabaseService.createTable(database, tableName, sqlFields);
     database.insert(tableName, user.toJson());
 
     String sql =
         'SELECT * FROM user '
-        'WHERE email = ? and username = ?;';
+        'WHERE username = ?;';
 
-    final resultSet = await database.rawQuery(sql, [email, username]);
-    print('teste resultset ${resultSet}');
-
-    sql =
-        'SELECT * FROM user;';
-
-    final result = await database.rawQuery(sql);
-    print('teste resultset ${result}');
+    final resultSet = await database.rawQuery(sql, [username]);
 
     for (var json in resultSet) {
       user = User.fromJson(json);
     }
 
-    print('testefromjson  ${user.toJson()}');
     return user;
   }
 

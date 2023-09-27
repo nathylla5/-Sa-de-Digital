@@ -1,4 +1,5 @@
 
+import 'package:flutter_application_2/db/db_helper/database_service.dart';
 import 'package:sqflite/sqflite.dart' as sqlite;
 
 import '../../domain/donation.dart';
@@ -8,13 +9,14 @@ class DonationDao {
 
   Donation donation = DonationBuilder().withLocation('Hospital X').withNumItems(30).withName('Remédio X').build();
 
-  String dbName = 'donat';
+  String dbName = 'saude_digital';
   String tableName = 'donation';
   String sqlFields = 'name TEXT NOT NULL, location TEXT NOT NULL, numItems INTEGER NOT NULL';
 
   Future<List<Donation>> findAll() async {
     DatabaseHelper dbHelper = DatabaseHelper(dbName: dbName, tableName: tableName, sqlFields: sqlFields);
     sqlite.Database database = await dbHelper.initialize();
+    DatabaseService.createTable(database, tableName, sqlFields);
     database.insert(tableName, donation.toJson());
 
     String sql = 'SELECT * FROM donation;';

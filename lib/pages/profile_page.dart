@@ -11,7 +11,7 @@ class ProfileView extends StatefulWidget {
 }
 
 class _ProfileViewState extends State<ProfileView> {
-  Future<User> userProfile = UserDao().getInfoProfile('@tarsis_marinheiro', 'tarsis@ifal.edu.br');
+  Future<User> userProfile = UserDao().getInfoProfile('@tarsis_marinheiro');
   final endDate = DateTime.now().add(const Duration(days: 30));
 
   @override

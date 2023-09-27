@@ -41,7 +41,7 @@ class _DetalhesPageState extends State<DetalhesPage> {
                   const SizedBox(height: 16),
                   Center(
                     child: Image.asset(
-                      widget.med.imagemAssetPath,
+                      widget.med.imagem,
                       height: 240,
                       width: 240,
                       fit: BoxFit.contain,
