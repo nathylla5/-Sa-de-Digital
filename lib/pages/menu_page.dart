@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/pages/donations_page.dart';
-import 'package:flutter_application_2/pages/medicamentos_page.dart';
-import 'package:flutter_application_2/pages/profile_page.dart';
+import 'package:flutter_application_2/db/services/auth_service.dart';
 import 'package:flutter_application_2/pages/alarm_page.dart';
+import 'package:flutter_application_2/pages/donations_page.dart';
+import 'package:flutter_application_2/pages/login_page.dart';
+import 'package:flutter_application_2/pages/profile_page.dart';
+import 'package:flutter_application_2/pages/medicamentos_page.dart';
 import 'package:flutter_application_2/pages/hospital_page.dart';
 import 'package:flutter_application_2/widgets/menu_button.dart';
+import 'package:provider/provider.dart';
 
 final constNames = [
   'Alarmes',
@@ -33,19 +36,30 @@ class _MenuViewState extends State<MenuView> {
         toolbarHeight: 100,
         backgroundColor: Colors.cyan[400],
         elevation: 10,
+        actions: [
+          IconButton(
+            onPressed: () {
+              Provider.of<AuthService>(context, listen: false).logout();
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                return const LoginPage();
+              }));
+            },
+            icon: const Icon(Icons.logout_outlined),
+          ),
+        ],
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(bottom: Radius.circular(20))),
         leading: IconButton(
-            iconSize: 60,
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                    builder: (context) => const ProfileView(),
-              ));
-            },
-            icon: const Icon(
-              Icons.account_circle,
-            )),
+          iconSize: 60,
+          onPressed: () {
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => const ProfileView(),
+            ));
+          },
+          icon: const Icon(
+            Icons.account_circle,
+          ),
+        ),
       ),
       body: ListView(
         children: [

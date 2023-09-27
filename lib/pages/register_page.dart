@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_2/domain/user.dart';
 import 'package:flutter_application_2/pages/login_page.dart';
 import 'package:flutter_application_2/widgets/show_dialog.dart';
-import 'package:sqflite/sqflite.dart';
 import 'package:uuid/uuid.dart';
 import '../db/dao/user_dao.dart';
-import '../db/db_helper/database_helper.dart';
 import '../widgets/create_label.dart';
 
 class RegisterView extends StatefulWidget {
