@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/db/services/auth_service.dart';
 import 'package:provider/provider.dart';
-
 import '../pages/login_page.dart';
 import '../pages/menu_page.dart';
 
@@ -17,7 +16,7 @@ class _AuthCheckState extends State<AuthCheck> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   void verificarUsuario() {
-    var ctx = Provider.of<AuthService>(context, listen: false);
+    var ctx = Provider.of<AuthService>(context, listen: true);
     var user = ctx.usuario;
     Widget page = const LoginPage();
     if (user != null) {
@@ -48,12 +47,12 @@ class _AuthCheckState extends State<AuthCheck> {
               'assets/Logo.png',
               width: 320,
             ),
-            CircularProgressIndicator(
+            const CircularProgressIndicator(
               color: Color(0xFF0292B7),
               strokeWidth: 6,
             ),
-            SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 20),
+            const Text(
               'Bem-Vindo!',
               style: TextStyle(fontSize: 20),
             ),

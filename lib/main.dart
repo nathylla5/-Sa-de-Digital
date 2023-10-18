@@ -5,6 +5,7 @@ import 'package:flutter_application_2/widgets/auth_check.dart';
 import 'package:provider/provider.dart';
 
 import 'db/services/auth_service.dart';
+import 'pages/adm_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,7 +29,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'Saúde Digital',
-      home: AuthCheck(),
+      home: /*AuthCheck*/AdmPage(),
+      
+      
     );
   }
 }
