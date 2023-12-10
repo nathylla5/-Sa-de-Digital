@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../db/dao/user_dao.dart';
+import 'package:flutter_application_2/domain/data_api.dart';
 import '../domain/user.dart';
 
 class ProfileView extends StatefulWidget {
@@ -11,8 +10,29 @@ class ProfileView extends StatefulWidget {
 }
 
 class _ProfileViewState extends State<ProfileView> {
-  Future<User> userProfile = UserDao().getInfoProfile('@tarsis_marinheiro');
+  DataApi apiService = DataApi();
+  late Future<User> userProfile;
   final endDate = DateTime.now().add(const Duration(days: 30));
+
+  @override
+  void initState() {
+    super.initState();
+    userProfile = fetchUserData(1);
+    userProfile.then((user) {
+      print('Dados do usuário: $user');
+    });
+  }
+
+
+  Future<User> fetchUserData(int userId) async {
+    try {
+      Map<String, dynamic> userData = await apiService.fetchFakeUserData(userId);
+      print(userData);
+      return User.fromJson(userData);
+    } catch (e) {
+      throw Exception('Erro ao carregar dados do usuário: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -204,7 +224,7 @@ class _ProfileViewState extends State<ProfileView> {
                     Text('Telefone:',
                         style:
                             TextStyle(fontSize: 18, color: Colors.cyan[300])),
-                    Text('(99) 99999-9999',
+                    Text(profile.phone,
                         style:
                             const TextStyle(fontSize: 16, color: Colors.grey)),
                     Text('Doenças:',
