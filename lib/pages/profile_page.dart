@@ -18,9 +18,6 @@ class _ProfileViewState extends State<ProfileView> {
   void initState() {
     super.initState();
     userProfile = fetchUserData(1);
-    userProfile.then((user) {
-      print('Dados do usuário: $user');
-    });
   }
 
 
