@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../domain/medicamentos.dart';
+import '../domain/unsplash_api.dart';
 import '../pages/detalhes_page.dart';
 
 class Remedios extends StatefulWidget {
@@ -13,6 +14,23 @@ class Remedios extends StatefulWidget {
 }
 
 class _RemediosState extends State<Remedios> {
+  String imageUrl = '';
+
+  @override
+  void initState() {
+    super.initState();
+    buscarFoto();
+  }
+
+  Future<void> buscarFoto() async {
+    try {
+      imageUrl = await UnsplashApi().buscarFoto('medication');
+      setState(() {});
+    } catch (e) {
+      print('Erro ao buscar a foto: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -25,10 +43,10 @@ class _RemediosState extends State<Remedios> {
           children: [
             ClipRRect(
               borderRadius: const BorderRadius.all(Radius.circular(4)),
-              child: Image.asset(
-                widget.med.imagem,
-                height: 80,
-                width: 80,
+              child: Image.network(
+                imageUrl,
+                height: 100,
+                width: 100,
                 fit: BoxFit.contain,
               ),
             ),

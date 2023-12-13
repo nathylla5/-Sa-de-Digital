@@ -9,6 +9,7 @@ class User {
   late String _password;
   late String _diseases;
   late String _urlImage;
+  late String _phone;
 
   String get id => _id;
   String get name => _name;
@@ -18,6 +19,7 @@ class User {
   String get password => _password;
   String get diseases => _diseases;
   String get urlImage => _urlImage;
+  String get phone => _phone;
 
   User._({
     required String id,
@@ -27,7 +29,8 @@ class User {
     required String name,
     required String username,
     required String urlImage,
-    required String diseases
+    required String diseases,
+    required String phone
   }) {
     _id = id;
     _email = email;
@@ -37,6 +40,7 @@ class User {
     _name = name;
     _urlImage = urlImage;
     _diseases = diseases;
+    _phone = phone;
   }
 
   User.fromJson(Map<String, dynamic> json) {
@@ -48,6 +52,7 @@ class User {
     _urlImage = json['urlImage'];
     _email = json['email'];
     _diseases = json['diseases'];
+    _phone = json['phone'];
   }
 
   Map<String, dynamic> toJson() {
@@ -60,6 +65,7 @@ class User {
     data['urlImage'] = this._urlImage;
     data['email'] = this._email;
     data['diseases'] = this._diseases;
+    data['phone'] = this._phone;
     return data;
   }
 
@@ -87,6 +93,7 @@ class UserBuilder {
   late String _password;
   late String _urlImage;
   late String _diseases;
+  late String _phone;
 
   UserBuilder() {
     _id = '';
@@ -97,6 +104,7 @@ class UserBuilder {
     _password = '';
     _urlImage = '';
     _diseases = '';
+    _phone = '';
   }
 
   UserBuilder withID(String id) {
@@ -139,6 +147,11 @@ class UserBuilder {
     return this;
   }
 
+  UserBuilder withPhone(String phone) {
+    _phone = phone;
+    return this;
+  }
+
   User build() {
     return User._(
       id: _id,
@@ -148,7 +161,8 @@ class UserBuilder {
       name: _name,
       username: _username,
       diseases: _diseases,
-      urlImage: _urlImage
+      urlImage: _urlImage,
+      phone: _phone
     );
   }
 }

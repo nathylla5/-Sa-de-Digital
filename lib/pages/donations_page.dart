@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/pages/menu_page.dart';
 import 'package:flutter_application_2/widgets/create_donation.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../db/dao/donation_dao.dart';
 import '../domain/donation.dart';
+import '../widgets/location_input.dart';
 
 class DonationsView extends StatefulWidget {
   const DonationsView({Key? key}) : super(key: key);
@@ -32,7 +35,7 @@ class _DonationsViewState extends State<DonationsView> {
               iconSize: 40,
               color: Colors.cyan,
               onPressed: () {
-                Navigator.of(context).push(
+                Navigator.of(context).pushReplacement(
                   MaterialPageRoute(builder: (context) => const MenuView()),
                 );
               },
@@ -44,10 +47,7 @@ class _DonationsViewState extends State<DonationsView> {
           IconButton(
               color: Colors.cyan,
               iconSize: 25,
-              onPressed: () {
-                //Navigator.of(context).push(
-                //    MaterialPageRoute(builder: (context) => null),);
-              },
+              onPressed: onPressed,
               icon: const Icon(
                 Icons.add,
               ))
@@ -71,6 +71,21 @@ class _DonationsViewState extends State<DonationsView> {
             padding: EdgeInsets.only(top: 50),
             child: Center(child: CircularProgressIndicator()),
           );
+        },
+      ),
+    );
+  }
+
+  Future<void> onPressed() async {
+
+    List<Location> locations = await locationFromAddress('ARAPIRACA, BRA');
+    LatLng latLng = LatLng(locations[0].latitude, locations[0].longitude);
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) {
+          return MapPage(latLng: latLng);
         },
       ),
     );

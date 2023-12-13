@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../domain/donation.dart';
 
 class CreateDonation extends StatefulWidget {
@@ -24,7 +23,8 @@ class _CreateDonationState extends State<CreateDonation> {
           style: const TextStyle(color: Colors.cyan, fontSize: 15)),
       subtitle: Text('Local da doação: ${widget.donation.location}'),
       isThreeLine: true,
-      onTap: () {},
+      onTap: () {
+      },
       //dense: true,
       trailing: Text('Quantidade: ${widget.donation.numItems}',
           style: const TextStyle(color: Colors.cyan, fontSize: 15)),
